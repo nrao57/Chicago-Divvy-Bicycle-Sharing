@@ -1,0 +1,11 @@
+#This script is to see if there are any correlations between
+#the features and fields
+import pandas as pd
+import numpy as np
+import os
+from matplotlib import pyplot as plt
+
+data_dir = "/Users/nikhil/Desktop/ChicagoBikeSharing/chicago-divvy-bicycle-sharing-data"
+data_set = pd.read_csv(data_dir+"/data_randreduced.csv")
+
+print(data_set.shape)

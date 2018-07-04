@@ -13,11 +13,11 @@ data_columns = ['trip_id', 'year', 'month',
 		'longitude_end', 'dpcapacity_end'] 
 
 #lets set the directory path where all the data is located
-os.chdir('/Users/nikhil/Desktop/ChicagoBikeSharing/chicago-divvy-bicycle-sharing-data')
+data_dir = '/Users/nikhil/Desktop/ChicagoBikeSharing/chicago-divvy-bicycle-sharing-data'
 data_filename = "data.csv" 
 
 #Create an Iterator from the data
-data_set = pd.read_csv(data_filename, chunksize=100000)
+data_set = pd.read_csv(data_dir+'/'+data_filename, chunksize=100000)
 
 #calculate total number of rows of data
 def calc_totalrows():
@@ -34,6 +34,9 @@ def get_subset(data_set):
 	return data_reduced
 
 data_randreduced = get_subset(data_set)
+
+data_randreduced.to_csv('data_randreduced.csv')
+
 
 
 
