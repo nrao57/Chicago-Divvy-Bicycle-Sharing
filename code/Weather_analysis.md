@@ -18,7 +18,7 @@ from scipy.stats import ttest_ind
 
 ```python
 os.chdir("..")
-data_set = pd.read_csv("Datasets/data_randreduced.csv")
+data_set = pd.read_csv("Datasets/data.csv")
 os.chdir('code')
 ```
 
@@ -32,11 +32,12 @@ data_set['events'].value_counts()/sum(data_set['events'].value_counts())
 
 
 
-    cloudy          0.880463
-    clear           0.054871
-    rain or snow    0.045287
-    not clear       0.010742
-    tstorms         0.008636
+    cloudy          0.884496
+    clear           0.053903
+    rain or snow    0.045505
+    not clear       0.009285
+    tstorms         0.006755
+    unknown         0.000056
     Name: events, dtype: float64
 
 
@@ -51,6 +52,7 @@ data_set.loc[data_set['events']=='cloudy','events']='clear'
 data_set.loc[data_set['events']=='rain or snow','events']='bad'
 data_set.loc[data_set['events']=='not clear','events']='bad'
 data_set.loc[data_set['events']=='tstorms','events']='bad'
+data_set = data_set[data_set['events']!='unknown']
 ```
 
 
@@ -61,14 +63,14 @@ data_set['tripduration'].describe()
 
 
 
-    count    9495.000000
-    mean       11.413512
-    std         7.137277
-    min         2.000000
-    25%         5.966667
-    50%         9.616667
-    75%        15.216667
-    max        57.866667
+    count    9.494699e+06
+    mean     1.144687e+01
+    std      7.206053e+00
+    min      2.000000e+00
+    25%      6.033333e+00
+    50%      9.633333e+00
+    75%      1.520000e+01
+    max      6.000000e+01
     Name: tripduration, dtype: float64
 
 
@@ -115,11 +117,11 @@ data_set[['events','tripduration']].groupby('events').mean()
   <tbody>
     <tr>
       <th>bad</th>
-      <td>10.523398</td>
+      <td>10.400526</td>
     </tr>
     <tr>
       <th>clear</th>
-      <td>11.475052</td>
+      <td>11.515496</td>
     </tr>
   </tbody>
 </table>
@@ -163,11 +165,11 @@ data_set[['events','tripduration']].groupby('events').std()
   <tbody>
     <tr>
       <th>bad</th>
-      <td>6.816047</td>
+      <td>6.595985</td>
     </tr>
     <tr>
       <th>clear</th>
-      <td>7.155229</td>
+      <td>7.238986</td>
     </tr>
   </tbody>
 </table>
@@ -190,7 +192,7 @@ ttest_ind(pop1, pop2, equal_var=False)
 
 
 
-    Ttest_indResult(statistic=3.334925788519319, pvalue=0.0008975943228101837)
+    Ttest_indResult(statistic=124.40031228827422, pvalue=0.0)
 
 
 
